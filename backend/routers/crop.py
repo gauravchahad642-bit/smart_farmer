@@ -1,9 +1,9 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 
-from backend.schemas import CropCreate
-from backend.database import SessionLocal
-from backend.models import Crop
+from schemas import CropCreate
+from database import SessionLocal
+from models import Crop
 
 router = APIRouter(
     prefix="/crops",

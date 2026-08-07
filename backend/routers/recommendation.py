@@ -1,9 +1,9 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 
-from backend.database import SessionLocal
-from backend.models import Recommendation
-from backend.schemas import RecommendationCreate
+from database import SessionLocal
+from models import Recommendation
+from schemas import RecommendationCreate
 
 
 router = APIRouter(

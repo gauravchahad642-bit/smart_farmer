@@ -1,9 +1,9 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 
-from backend.database import SessionLocal
-from backend.models import Fertilizer
-from backend.schemas import FertilizerCreate
+from database import SessionLocal
+from models import Fertilizer
+from schemas import FertilizerCreate
 
 router = APIRouter(
     prefix="/fertilizers",

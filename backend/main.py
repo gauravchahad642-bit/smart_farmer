@@ -1,14 +1,14 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from backend.database import Base, engine
-from backend import models
+from database import Base, engine
+import models
 
-from backend.routers import crop
-from backend.routers import fertilizer
-from backend.routers import pest
-from backend.routers import user
-from backend.routers import recommendation
+from routers import crop
+from routers import fertilizer
+from routers import pest
+from routers import user
+from routers import recommendation
 
 Base.metadata.create_all(bind=engine)
 

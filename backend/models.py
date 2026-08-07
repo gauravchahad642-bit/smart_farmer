@@ -27,6 +27,7 @@ class Fertilizer(Base):
     name = Column(String, nullable=False)
     description = Column(String)
     usage = Column(String)
+    quantity = Column(Integer)
 
 
 class Pest(Base):

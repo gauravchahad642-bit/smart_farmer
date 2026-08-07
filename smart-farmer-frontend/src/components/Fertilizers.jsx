@@ -26,6 +26,7 @@ function Fertilizers({
             <h3>{fertilizer.name}</h3>
             <p>Description: {fertilizer.description}</p>
             <p>Usage: {fertilizer.usage}</p>
+            <p>Quantity: {fertilizer.quantity}</p>
             <hr />
           </div>
         ))}

@@ -27,7 +27,8 @@ def create_fertilizer(
     new_fertilizer = Fertilizer(
         name=fertilizer.name,
         description=fertilizer.description,
-        usage=fertilizer.usage
+        usage=fertilizer.usage,
+        quantity=fertilizer.quantity
     )
 
     db.add(new_fertilizer)

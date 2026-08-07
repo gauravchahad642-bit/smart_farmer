@@ -11,6 +11,7 @@ class FertilizerCreate(BaseModel):
     name: str = Field(..., min_length=2)
     description: str = Field(..., min_length=5)
     usage: str = Field(..., min_length=5)
+    quantity: int = Field(..., gt=0)
 
 
 class PestCreate(BaseModel):

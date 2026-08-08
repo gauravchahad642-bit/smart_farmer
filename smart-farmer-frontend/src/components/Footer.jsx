@@ -9,7 +9,7 @@ function Footer() {
         color: "white",
       }}
     >
-      © 2026 Smart Farmer System | Developed by Gaurav Chahad
+      © 2026 Smart Farmer System | Developed by GAURAV AADESH & SANCHIT
     </footer>
   );
 }

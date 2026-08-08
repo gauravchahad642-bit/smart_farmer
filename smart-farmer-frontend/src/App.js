@@ -19,7 +19,164 @@ import FarmingTips from "./components/FarmingTips";
 import DownloadReport from "./components/DownloadReport";
 import AIRecommendation from "./components/AIRecommendation";
 import Welcome from "./pages/Welcome";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate, useNavigate } from "react-router-dom";
+
+function DashboardPage({
+  isLoggedIn,
+  crops,
+  fertilizers,
+  pests,
+  recommendations,
+  users,
+  showCrops,
+  setShowCrops,
+  showFertilizers,
+  setShowFertilizers,
+  showPests,
+  setShowPests,
+  showRecommendations,
+  setShowRecommendations,
+  showUsers,
+  setShowUsers,
+  search,
+  setSearch,
+}) {
+  if (!isLoggedIn) {
+    return <Navigate to="/login" />;
+  }
+
+  return (
+    <div className="App">
+      <Header />
+
+      <Dashboard
+        crops={crops}
+        fertilizers={fertilizers}
+        pests={pests}
+        recommendations={recommendations}
+        users={users}
+      />
+
+      <Charts
+        crops={crops}
+        fertilizers={fertilizers}
+        pests={pests}
+        recommendations={recommendations}
+        users={users}
+      />
+
+      <SearchBar
+        search={search}
+        setSearch={setSearch}
+      />
+
+      <div className="container">
+        <Crops
+          crops={crops}
+          showCrops={showCrops}
+          setShowCrops={setShowCrops}
+          search={search}
+        />
+
+        <Fertilizers
+          fertilizers={fertilizers}
+          showFertilizers={showFertilizers}
+          setShowFertilizers={setShowFertilizers}
+          search={search}
+        />
+
+        <Pests
+          pests={pests}
+          showPests={showPests}
+          setShowPests={setShowPests}
+          search={search}
+        />
+
+        <Recommendations
+          recommendations={recommendations}
+          showRecommendations={showRecommendations}
+          setShowRecommendations={setShowRecommendations}
+          search={search}
+        />
+
+        <Users
+          users={users}
+          showUsers={showUsers}
+          setShowUsers={setShowUsers}
+        />
+
+        <Weather />
+        <AIRecommendation />
+        <FarmingTips />
+
+        <DownloadReport
+          crops={crops}
+          fertilizers={fertilizers}
+          pests={pests}
+          recommendations={recommendations}
+          users={users}
+        />
+
+        <VoiceAssistant />
+        <Footer />
+      </div>
+    </div>
+  );
+}
+
+function LoginPage({
+  isLoggedIn,
+  loginEmail,
+  setLoginEmail,
+  loginPassword,
+  setLoginPassword,
+  loginUser,
+  logoutUser,
+  name,
+  setName,
+  email,
+  setEmail,
+  password,
+  setPassword,
+  registerUser,
+}) {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      navigate("/dashboard");
+    }
+  }, [isLoggedIn, navigate]);
+
+  if (isLoggedIn) {
+    return null;
+  }
+
+  return (
+    <div className="container">
+      <Login
+        loginEmail={loginEmail}
+        setLoginEmail={setLoginEmail}
+        loginPassword={loginPassword}
+        setLoginPassword={setLoginPassword}
+        loginUser={loginUser}
+        logoutUser={logoutUser}
+        isLoggedIn={isLoggedIn}
+      />
+
+      <Register
+        name={name}
+        setName={setName}
+        email={email}
+        setEmail={setEmail}
+        password={password}
+        setPassword={setPassword}
+        registerUser={registerUser}
+        isLoggedIn={isLoggedIn}
+      />
+    </div>
+  );
+}
 
 function App() {
   const [crops, setCrops] = useState([]);
@@ -113,134 +270,60 @@ function App() {
       .catch((err) => console.log(err));
   }, []);
 
-  const DashboardPage = () => {
-    if (!isLoggedIn) {
-      return <Navigate to="/login" />;
-    }
-
-    return (
-      <div className="App">
-        <Header />
-
-        <Dashboard
-          crops={crops}
-          fertilizers={fertilizers}
-          pests={pests}
-          recommendations={recommendations}
-          users={users}
-        />
-
-        <Charts
-          crops={crops}
-          fertilizers={fertilizers}
-          pests={pests}
-          recommendations={recommendations}
-          users={users}
-        />
-
-        <SearchBar
-          search={search}
-          setSearch={setSearch}
-        />
-
-        <div className="container">
-          <Crops
-            crops={crops}
-            showCrops={showCrops}
-            setShowCrops={setShowCrops}
-            search={search}
-          />
-
-          <Fertilizers
-            fertilizers={fertilizers}
-            showFertilizers={showFertilizers}
-            setShowFertilizers={setShowFertilizers}
-            search={search}
-          />
-
-          <Pests
-            pests={pests}
-            showPests={showPests}
-            setShowPests={setShowPests}
-            search={search}
-          />
-
-          <Recommendations
-            recommendations={recommendations}
-            showRecommendations={showRecommendations}
-            setShowRecommendations={setShowRecommendations}
-            search={search}
-          />
-
-          <Users
-            users={users}
-            showUsers={showUsers}
-            setShowUsers={setShowUsers}
-          />
-
-          <Weather />
-          <AIRecommendation />
-          <FarmingTips />
-
-          <DownloadReport
-            crops={crops}
-            fertilizers={fertilizers}
-            pests={pests}
-            recommendations={recommendations}
-            users={users}
-          />
-
-          <VoiceAssistant />
-          <Footer />
-        </div>
-      </div>
-    );
-  };
-
-  const LoginPage = () => {
-    if (isLoggedIn) {
-      return <Navigate to="/dashboard" />;
-    }
-
-    return (
-      <div className="container">
-        <Login
-          loginEmail={loginEmail}
-          setLoginEmail={setLoginEmail}
-          loginPassword={loginPassword}
-          setLoginPassword={setLoginPassword}
-          loginUser={loginUser}
-          logoutUser={logoutUser}
-          isLoggedIn={isLoggedIn}
-        />
-
-        <Register
-          name={name}
-          setName={setName}
-          email={email}
-          setEmail={setEmail}
-          password={password}
-          setPassword={setPassword}
-          registerUser={registerUser}
-          isLoggedIn={isLoggedIn}
-        />
-      </div>
-    );
-  };
-
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Welcome />} />
+        <Route
+          path="/"
+          element={<Welcome />}
+        />
 
         <Route
           path="/login"
-          element={<LoginPage />}
+          element={
+            <LoginPage
+              isLoggedIn={isLoggedIn}
+              loginEmail={loginEmail}
+              setLoginEmail={setLoginEmail}
+              loginPassword={loginPassword}
+              setLoginPassword={setLoginPassword}
+              loginUser={loginUser}
+              logoutUser={logoutUser}
+              name={name}
+              setName={setName}
+              email={email}
+              setEmail={setEmail}
+              password={password}
+              setPassword={setPassword}
+              registerUser={registerUser}
+            />
+          }
         />
 
         <Route
           path="/dashboard"
-          element={<DashboardPage />}
+          element={
+            <DashboardPage
+              isLoggedIn={isLoggedIn}
+              crops={crops}
+              fertilizers={fertilizers}
+              pests={pests}
+              recommendations={recommendations}
+              users={users}
+              showCrops={showCrops}
+              setShowCrops={setShowCrops}
+              showFertilizers={showFertilizers}
+              setShowFertilizers={setShowFertilizers}
+              showPests={showPests}
+              setShowPests={setShowPests}
+              showRecommendations={showRecommendations}
+              setShowRecommendations={setShowRecommendations}
+              showUsers={showUsers}
+              setShowUsers={setShowUsers}
+              search={search}
+              setSearch={setSearch}
+            />
+          }
         />
 
         <Route

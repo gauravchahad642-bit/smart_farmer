@@ -27,7 +27,10 @@ function Welcome() {
         </p>
 
         <button
-          onClick={() => navigate("/login")}
+          onClick={() => {
+          localStorage.removeItem("token");
+          navigate("/login");
+      }}
           style={{
             marginTop: "20px",
             padding: "12px 30px",

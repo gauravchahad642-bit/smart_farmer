@@ -112,18 +112,13 @@ function LoginPage({
   setPassword,
   registerUser,
 }) {
-  const navigate = useNavigate();
+const navigate = useNavigate();
 
-  useEffect(() => {
-    if (isLoggedIn) {
-      navigate("/dashboard", { replace: true });
-    }
-  }, [isLoggedIn, navigate]);
-
+useEffect(() => {
   if (isLoggedIn) {
-    return null;
+    navigate("/dashboard", { replace: true });
   }
-
+}, [isLoggedIn, navigate]);
   return (
     <div className="container">
 

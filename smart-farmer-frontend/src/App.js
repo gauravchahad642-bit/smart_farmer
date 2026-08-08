@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
 import API from "./api";
+
 import Header from "./components/Header";
 import Dashboard from "./components/Dashboard";
 import Crops from "./components/Crops";
@@ -18,35 +19,35 @@ import Footer from "./components/Footer";
 import FarmingTips from "./components/FarmingTips";
 import DownloadReport from "./components/DownloadReport";
 import AIRecommendation from "./components/AIRecommendation";
+
 import Welcome from "./pages/Welcome";
-import { BrowserRouter, Routes, Route, Navigate, useNavigate } from "react-router-dom";
+import ProtectedRoute from "./ProtectedRoute";
+
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Navigate,
+  useNavigate,
+} from "react-router-dom";
+
+
+/* =====================================================
+   DASHBOARD PAGE
+===================================================== */
 
 function DashboardPage({
-  isLoggedIn,
   crops,
   fertilizers,
   pests,
   recommendations,
   users,
-  showCrops,
-  setShowCrops,
-  showFertilizers,
-  setShowFertilizers,
-  showPests,
-  setShowPests,
-  showRecommendations,
-  setShowRecommendations,
-  showUsers,
-  setShowUsers,
   search,
   setSearch,
 }) {
-  if (!isLoggedIn) {
-    return <Navigate to="/login" />;
-  }
-
   return (
     <div className="App">
+
       <Header />
 
       <Dashboard
@@ -70,59 +71,30 @@ function DashboardPage({
         setSearch={setSearch}
       />
 
-      <div className="container">
-        <Crops
-          crops={crops}
-          showCrops={showCrops}
-          setShowCrops={setShowCrops}
-          search={search}
-        />
+      <Weather />
 
-        <Fertilizers
-          fertilizers={fertilizers}
-          showFertilizers={showFertilizers}
-          setShowFertilizers={setShowFertilizers}
-          search={search}
-        />
+      <FarmingTips />
 
-        <Pests
-          pests={pests}
-          showPests={showPests}
-          setShowPests={setShowPests}
-          search={search}
-        />
+      <DownloadReport
+        crops={crops}
+        fertilizers={fertilizers}
+        pests={pests}
+        recommendations={recommendations}
+        users={users}
+      />
 
-        <Recommendations
-          recommendations={recommendations}
-          showRecommendations={showRecommendations}
-          setShowRecommendations={setShowRecommendations}
-          search={search}
-        />
+      <VoiceAssistant />
 
-        <Users
-          users={users}
-          showUsers={showUsers}
-          setShowUsers={setShowUsers}
-        />
+      <Footer />
 
-        <Weather />
-        <AIRecommendation />
-        <FarmingTips />
-
-        <DownloadReport
-          crops={crops}
-          fertilizers={fertilizers}
-          pests={pests}
-          recommendations={recommendations}
-          users={users}
-        />
-
-        <VoiceAssistant />
-        <Footer />
-      </div>
     </div>
   );
 }
+
+
+/* =====================================================
+   LOGIN PAGE
+===================================================== */
 
 function LoginPage({
   isLoggedIn,
@@ -144,7 +116,7 @@ function LoginPage({
 
   useEffect(() => {
     if (isLoggedIn) {
-      navigate("/dashboard");
+      navigate("/dashboard", { replace: true });
     }
   }, [isLoggedIn, navigate]);
 
@@ -154,6 +126,7 @@ function LoginPage({
 
   return (
     <div className="container">
+
       <Login
         loginEmail={loginEmail}
         setLoginEmail={setLoginEmail}
@@ -174,38 +147,190 @@ function LoginPage({
         registerUser={registerUser}
         isLoggedIn={isLoggedIn}
       />
+
     </div>
   );
 }
 
+
+/* =====================================================
+   CROPS PAGE
+===================================================== */
+
+function CropsPage({
+  crops,
+  search,
+}) {
+  return (
+    <div className="App">
+
+      <Header />
+
+      <div className="container">
+
+        <Crops
+          crops={crops}
+          showCrops={true}
+          setShowCrops={() => {}}
+          search={search}
+        />
+
+      </div>
+
+      <Footer />
+
+    </div>
+  );
+}
+
+
+/* =====================================================
+   FERTILIZERS PAGE
+===================================================== */
+
+function FertilizersPage({
+  fertilizers,
+  search,
+}) {
+  return (
+    <div className="App">
+
+      <Header />
+
+      <div className="container">
+
+        <Fertilizers
+          fertilizers={fertilizers}
+          showFertilizers={true}
+          setShowFertilizers={() => {}}
+          search={search}
+        />
+
+      </div>
+
+      <Footer />
+
+    </div>
+  );
+}
+
+
+/* =====================================================
+   PESTS PAGE
+===================================================== */
+
+function PestsPage({
+  pests,
+  search,
+}) {
+  return (
+    <div className="App">
+
+      <Header />
+
+      <div className="container">
+
+        <Pests
+          pests={pests}
+          showPests={true}
+          setShowPests={() => {}}
+          search={search}
+        />
+
+      </div>
+
+      <Footer />
+
+    </div>
+  );
+}
+
+
+/* =====================================================
+   RECOMMENDATIONS PAGE
+===================================================== */
+
+function RecommendationsPage({
+  recommendations,
+  search,
+}) {
+  return (
+    <div className="App">
+
+      <Header />
+
+      <div className="container">
+
+        <Recommendations
+          recommendations={recommendations}
+          showRecommendations={true}
+          setShowRecommendations={() => {}}
+          search={search}
+        />
+
+      </div>
+
+      <Footer />
+
+    </div>
+  );
+}
+
+
+/* =====================================================
+   APP
+===================================================== */
+
 function App() {
+
+  /* -------------------------
+     DATA STATES
+  ------------------------- */
+
   const [crops, setCrops] = useState([]);
   const [fertilizers, setFertilizers] = useState([]);
   const [pests, setPests] = useState([]);
   const [recommendations, setRecommendations] = useState([]);
   const [users, setUsers] = useState([]);
 
-  const [showCrops, setShowCrops] = useState(false);
-  const [showFertilizers, setShowFertilizers] = useState(false);
-  const [showPests, setShowPests] = useState(false);
-  const [showRecommendations, setShowRecommendations] = useState(false);
-  const [showUsers, setShowUsers] = useState(false);
+  /* -------------------------
+     REGISTER STATES
+  ------------------------- */
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  /* -------------------------
+     LOGIN STATES
+  ------------------------- */
+
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
+
+  /* -------------------------
+     LOGIN STATUS
+  ------------------------- */
 
   const [isLoggedIn, setIsLoggedIn] = useState(
     !!localStorage.getItem("token")
   );
 
+  /* -------------------------
+     SEARCH
+  ------------------------- */
+
   const [search, setSearch] = useState("");
 
+
+  /* =====================================================
+     REGISTER USER
+  ===================================================== */
+
   const registerUser = async () => {
+
     try {
+
       const response = await API.post("/users/", {
         name,
         email,
@@ -217,121 +342,321 @@ function App() {
       setName("");
       setEmail("");
       setPassword("");
+
     } catch (error) {
-      alert("Registration Failed");
+
       console.log(error);
+
+      alert("Registration Failed");
+
     }
+
   };
 
-  const loginUser = async () => {
-    try {
-      const response = await API.post("/users/login", {
-        email: loginEmail,
-        password: loginPassword,
-      });
 
-      localStorage.setItem("token", response.data.access_token);
+  /* =====================================================
+     LOGIN USER
+  ===================================================== */
+
+  const loginUser = async () => {
+
+    try {
+
+      const response = await API.post(
+        "/users/login",
+        {
+          email: loginEmail,
+          password: loginPassword,
+        }
+      );
+
+      /* Save token */
+
+      localStorage.setItem(
+        "token",
+        response.data.access_token
+      );
+
+      /* Update login state */
+
+      setIsLoggedIn(true);
+
+      setLoginEmail("");
+      setLoginPassword("");
 
       alert("Login Successful");
 
-      setIsLoggedIn(true);
-      setLoginEmail("");
-      setLoginPassword("");
     } catch (error) {
+
+      console.log(error);
+
       alert("Invalid Email or Password");
+
     }
+
   };
+
+
+  /* =====================================================
+     LOGOUT USER
+  ===================================================== */
 
   const logoutUser = () => {
+
     localStorage.removeItem("token");
+
     setIsLoggedIn(false);
+
     alert("Logged Out Successfully");
+
   };
 
+
+  /* =====================================================
+     FETCH DATA ONLY AFTER LOGIN
+  ===================================================== */
+
   useEffect(() => {
+
+    if (!isLoggedIn) {
+      return;
+    }
+
+    /* Crops */
+
     API.get("/crops/")
       .then((res) => setCrops(res.data))
       .catch((err) => console.log(err));
+
+
+    /* Fertilizers */
 
     API.get("/fertilizers/")
       .then((res) => setFertilizers(res.data))
       .catch((err) => console.log(err));
 
+
+    /* Pests */
+
     API.get("/pests/")
       .then((res) => setPests(res.data))
       .catch((err) => console.log(err));
+
+
+    /* Recommendations */
 
     API.get("/recommendations/")
       .then((res) => setRecommendations(res.data))
       .catch((err) => console.log(err));
 
+
+    /* Users */
+
     API.get("/users/")
       .then((res) => setUsers(res.data))
       .catch((err) => console.log(err));
-  }, []);
+
+  }, [isLoggedIn]);
+
+
+  /* =====================================================
+     ROUTING
+  ===================================================== */
 
   return (
+
     <BrowserRouter>
+
       <Routes>
+
+        {/* =================================================
+            PUBLIC ROUTES
+        ================================================= */}
+
+        {/* App Open → Welcome */}
+
         <Route
           path="/"
           element={<Welcome />}
         />
+
+
+        {/* Welcome → Login/Register */}
 
         <Route
           path="/login"
           element={
             <LoginPage
               isLoggedIn={isLoggedIn}
+
               loginEmail={loginEmail}
               setLoginEmail={setLoginEmail}
+
               loginPassword={loginPassword}
               setLoginPassword={setLoginPassword}
+
               loginUser={loginUser}
               logoutUser={logoutUser}
+
               name={name}
               setName={setName}
+
               email={email}
               setEmail={setEmail}
+
               password={password}
               setPassword={setPassword}
+
               registerUser={registerUser}
             />
           }
         />
 
+
+        {/* =================================================
+            PROTECTED ROUTES
+        ================================================= */}
+
+        <Route element={<ProtectedRoute />}>
+
+          {/* Dashboard */}
+
+          <Route
+            path="/dashboard"
+            element={
+              <DashboardPage
+                crops={crops}
+                fertilizers={fertilizers}
+                pests={pests}
+                recommendations={recommendations}
+                users={users}
+                search={search}
+                setSearch={setSearch}
+              />
+            }
+          />
+
+
+          {/* Crops */}
+
+          <Route
+            path="/crops"
+            element={
+              <CropsPage
+                crops={crops}
+                search={search}
+              />
+            }
+          />
+
+
+          {/* Fertilizers */}
+
+          <Route
+            path="/fertilizers"
+            element={
+              <FertilizersPage
+                fertilizers={fertilizers}
+                search={search}
+              />
+            }
+          />
+
+
+          {/* Pests */}
+
+          <Route
+            path="/pests"
+            element={
+              <PestsPage
+                pests={pests}
+                search={search}
+              />
+            }
+          />
+
+
+          {/* AI Recommendation */}
+
+          <Route
+            path="/ai-recommendation"
+            element={
+              <div className="App">
+
+                <Header />
+
+                <div className="container">
+
+                  <AIRecommendation />
+
+                </div>
+
+                <Footer />
+
+              </div>
+            }
+          />
+
+
+          {/* Recommendations */}
+
+          <Route
+            path="/recommendations"
+            element={
+              <RecommendationsPage
+                recommendations={recommendations}
+                search={search}
+              />
+            }
+          />
+
+
+          {/* Users - Protected */}
+
+          <Route
+            path="/users"
+            element={
+              <div className="App">
+
+                <Header />
+
+                <div className="container">
+
+                  <Users
+                    users={users}
+                    showUsers={true}
+                    setShowUsers={() => {}}
+                  />
+
+                </div>
+
+                <Footer />
+
+              </div>
+            }
+          />
+
+        </Route>
+
+
+        {/* =================================================
+            UNKNOWN URL
+        ================================================= */}
+
         <Route
-          path="/dashboard"
+          path="*"
           element={
-            <DashboardPage
-              isLoggedIn={isLoggedIn}
-              crops={crops}
-              fertilizers={fertilizers}
-              pests={pests}
-              recommendations={recommendations}
-              users={users}
-              showCrops={showCrops}
-              setShowCrops={setShowCrops}
-              showFertilizers={showFertilizers}
-              setShowFertilizers={setShowFertilizers}
-              showPests={showPests}
-              setShowPests={setShowPests}
-              showRecommendations={showRecommendations}
-              setShowRecommendations={setShowRecommendations}
-              showUsers={showUsers}
-              setShowUsers={setShowUsers}
-              search={search}
-              setSearch={setSearch}
+            <Navigate
+              to="/"
+              replace
             />
           }
         />
 
-        <Route
-          path="*"
-          element={<Navigate to="/" />}
-        />
       </Routes>
+
     </BrowserRouter>
+
   );
 }
 

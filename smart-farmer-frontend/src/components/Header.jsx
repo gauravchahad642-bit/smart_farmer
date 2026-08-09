@@ -15,6 +15,18 @@ function Header() {
         <Link to="/dashboard">
           Dashboard
         </Link>
+        
+        <Link to="/crops">
+          Crops
+        </Link>
+
+        <Link to="/fertilizers">
+          Fertilizers
+        </Link>
+
+        <Link to="/pests">
+          Pests
+        </Link>
 
         <Link to="/login">
           User Login

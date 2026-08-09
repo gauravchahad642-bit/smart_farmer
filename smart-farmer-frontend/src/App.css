@@ -105,3 +105,75 @@ hr{
     border-top:1px solid #ddd;
     margin:10px 0;
 }
+@media (max-width: 768px) {
+
+    .header {
+        padding: 25px 15px;
+    }
+
+    .header h1 {
+        font-size: 28px;
+    }
+
+    .header p {
+        font-size: 16px;
+    }
+
+    .dashboard {
+        gap: 12px;
+        margin-top: 20px;
+        padding: 0 10px;
+    }
+
+    .dashboard-card {
+        width: 130px;
+        padding: 15px;
+    }
+
+    .dashboard-card h2 {
+        font-size: 26px;
+    }
+
+    .container {
+        grid-template-columns: 1fr;
+        padding: 15px;
+        gap: 15px;
+    }
+
+    .card {
+        padding: 15px;
+    }
+
+    input {
+        width: 90%;
+        box-sizing: border-box;
+    }
+
+    button {
+        font-size: 15px;
+        padding: 10px 16px;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .header h1 {
+        font-size: 24px;
+    }
+
+    .header p {
+        font-size: 14px;
+    }
+
+    .dashboard-card {
+        width: 110px;
+    }
+
+    .dashboard-card h2 {
+        font-size: 22px;
+    }
+
+    .container {
+        padding: 10px;
+    }
+}

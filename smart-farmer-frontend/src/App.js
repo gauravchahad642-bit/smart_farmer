@@ -339,12 +339,12 @@ function App() {
       setPassword("");
 
     } catch (error) {
-
       console.log(error);
-
-      alert("Registration Failed");
-
-    }
+      alert(
+        error.response?.data?.detail ||
+        "Registration Failed"
+      );
+  }
 
   };
 
@@ -385,10 +385,11 @@ function App() {
 
       console.log(error);
 
-      alert("Invalid Email or Password");
-
+      alert(
+        error.response?.data?.detail ||
+        "Login Failed"
+      );
     }
-
   };
 
 

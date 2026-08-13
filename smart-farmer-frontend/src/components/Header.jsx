@@ -1,10 +1,13 @@
 import { Link } from "react-router-dom";
+import logo from "../logo.png";
 
 function Header() {
   return (
     <header className="header">
 
-      <h1>🌾 Smart Farmer System</h1>
+      <h1><img src={logo} alt="Smart Farmer Logo" />
+      Smart Farmer System
+      </h1>
 
       <p>
         Crop, Fertilizer, Pest and Recommendation Management

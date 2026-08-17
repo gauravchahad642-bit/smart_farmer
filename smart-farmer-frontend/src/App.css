@@ -177,3 +177,15 @@ hr{
         padding: 10px;
     }
 }
+    .header h1 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+    .header h1 img {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+}

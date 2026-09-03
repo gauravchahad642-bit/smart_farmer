@@ -8,7 +8,7 @@ function AIRecommendation() {
   const recommendCrop = async () => {
     try {
       const response = await fetch(
-        `http://127.0.0.1:8000/recommendations/ai?soil_type=${soil}&season=${season}`
+        `http://10.248.31.56:8000/recommendations/ai?soil_type=${soil}&season=${season}`
       );
 
       const data = await response.json();

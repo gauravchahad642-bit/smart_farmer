@@ -63,3 +63,5 @@ function AIRecommendation() {
     </div>
   );
 }
+
+export default AIRecommendation;

@@ -20,7 +20,7 @@ import FarmingTips from "./components/FarmingTips";
 import DownloadReport from "./components/DownloadReport";
 import AIRecommendation from "./components/AIRecommendation";
 
-import Welcome from "./pages/Welcome";
+import Welcome from "./pages/welcome";
 import ProtectedRoute from "./ProtectedRoute";
 
 import {

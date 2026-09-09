@@ -1,47 +1,62 @@
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import logo from "../logo.png";
 
 function Header() {
+  const navigate = useNavigate();
+
+  const logoutUser = () => {
+    localStorage.removeItem("token");
+    navigate("/login");
+  };
+
   return (
     <header className="header">
 
-      <h1><img src={logo} alt="Smart Farmer Logo" />
-      Smart Farmer System
+      {/* Logo + Title */}
+      <h1>
+        <img src={logo} alt="Smart Farmer Logo" />
+        Smart Farmer System
       </h1>
 
       <p>
         Crop, Fertilizer, Pest and Recommendation Management
       </p>
 
+      {/* Navigation Buttons */}
       <nav className="header-nav">
 
-        <Link to="/dashboard">
+        <button onClick={() => navigate("/dashboard")}>
           Dashboard
-        </Link>
-        
-        <Link to="/crops">
+        </button>
+
+        <button onClick={() => navigate("/crops")}>
           Crops
-        </Link>
+        </button>
 
-        <Link to="/fertilizers">
+        <button onClick={() => navigate("/fertilizers")}>
           Fertilizers
-        </Link>
+        </button>
 
-        <Link to="/pests">
+        <button onClick={() => navigate("/pests")}>
           Pests
-        </Link>
+        </button>
 
-        <Link to="/login">
-          User Login
-        </Link>
 
-        <Link to="/recommendations">
+        <button onClick={() => navigate("/recommendations")}>
           User Recommendation
-        </Link>
+        </button>
 
-        <Link to="/ai-recommendation">
+        <button onClick={() => navigate("/ai-recommendation")}>
           AI Recommendation
-        </Link>
+        </button>
+
+        <button onClick={() => navigate("/users")}>
+          Users
+        </button>
+
+        <button onClick={logoutUser}>
+          Logout
+        </button>
 
       </nav>
 

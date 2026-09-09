@@ -156,6 +156,8 @@ function CropsPage({
   crops,
   search,
 }) {
+  const [showCrops, setShowCrops] = useState(true);
+
   return (
     <div className="App">
 
@@ -165,8 +167,8 @@ function CropsPage({
 
         <Crops
           crops={crops}
-          showCrops={true}
-          setShowCrops={() => {}}
+          showCrops={showCrops}
+          setShowCrops={setShowCrops}
           search={search}
         />
 
@@ -187,6 +189,8 @@ function FertilizersPage({
   fertilizers,
   search,
 }) {
+  const [showFertilizers, setShowFertilizers] = useState(true);
+
   return (
     <div className="App">
 
@@ -196,8 +200,8 @@ function FertilizersPage({
 
         <Fertilizers
           fertilizers={fertilizers}
-          showFertilizers={true}
-          setShowFertilizers={() => {}}
+          showFertilizers={showFertilizers}
+          setShowFertilizers={setShowFertilizers}
           search={search}
         />
 
@@ -218,6 +222,8 @@ function PestsPage({
   pests,
   search,
 }) {
+  const [showPests, setShowPests] = useState(true);
+
   return (
     <div className="App">
 
@@ -227,8 +233,8 @@ function PestsPage({
 
         <Pests
           pests={pests}
-          showPests={true}
-          setShowPests={() => {}}
+          showPests={showPests}
+          setShowPests={setShowPests}
           search={search}
         />
 
@@ -240,7 +246,6 @@ function PestsPage({
   );
 }
 
-
 /* =====================================================
    RECOMMENDATIONS PAGE
 ===================================================== */
@@ -249,6 +254,8 @@ function RecommendationsPage({
   recommendations,
   search,
 }) {
+  const [showRecommendations, setShowRecommendations] = useState(true);
+
   return (
     <div className="App">
 
@@ -258,8 +265,8 @@ function RecommendationsPage({
 
         <Recommendations
           recommendations={recommendations}
-          showRecommendations={true}
-          setShowRecommendations={() => {}}
+          showRecommendations={showRecommendations}
+          setShowRecommendations={setShowRecommendations}
           search={search}
         />
 
@@ -287,7 +294,7 @@ function App() {
   const [pests, setPests] = useState([]);
   const [recommendations, setRecommendations] = useState([]);
   const [users, setUsers] = useState([]);
-
+  const [showUsers, setShowUsers] = useState(true);
   /* -------------------------
      REGISTER STATES
   ------------------------- */
@@ -620,8 +627,8 @@ function App() {
 
                   <Users
                     users={users}
-                    showUsers={true}
-                    setShowUsers={() => {}}
+                    showUsers={showUsers}
+                    setShowUsers={setShowUsers}
                   />
 
                 </div>

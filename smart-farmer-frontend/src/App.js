@@ -116,7 +116,7 @@ function LoginPage({
 const navigate = useNavigate();
 
 useEffect(() => {
-  if (isLoggedIn) {
+  if (isLoggedIn && localStorage.getItem("token")) {
     navigate("/dashboard", { replace: true });
   }
 }, [isLoggedIn, navigate]);
@@ -156,13 +156,14 @@ useEffect(() => {
 function CropsPage({
   crops,
   search,
+  logoutUser,
 }) {
   const [showCrops, setShowCrops] = useState(true);
 
   return (
     <div className="App">
 
-      <Header />
+      <Header logoutUser={logoutUser} />
 
       <div className="container">
 
@@ -189,13 +190,14 @@ function CropsPage({
 function FertilizersPage({
   fertilizers,
   search,
+  logoutUser,
 }) {
   const [showFertilizers, setShowFertilizers] = useState(true);
 
   return (
     <div className="App">
 
-      <Header />
+      <Header logoutUser={logoutUser} />
 
       <div className="container">
 
@@ -222,13 +224,14 @@ function FertilizersPage({
 function PestsPage({
   pests,
   search,
+  logoutUser,
 }) {
   const [showPests, setShowPests] = useState(true);
 
   return (
     <div className="App">
 
-      <Header />
+      <Header logoutUser={logoutUser} />
 
       <div className="container">
 
@@ -254,13 +257,14 @@ function PestsPage({
 function RecommendationsPage({
   recommendations,
   search,
+  logoutUser,
 }) {
   const [showRecommendations, setShowRecommendations] = useState(true);
 
   return (
     <div className="App">
 
-      <Header />
+      <Header logoutUser={logoutUser} />
 
       <div className="container">
 
@@ -536,6 +540,7 @@ function App() {
                 users={users}
                 search={search}
                 setSearch={setSearch}
+                logoutUser={logoutUser}
               />
             }
           />
@@ -549,6 +554,7 @@ function App() {
               <CropsPage
                 crops={crops}
                 search={search}
+                logoutUser={logoutUser}
               />
             }
           />
@@ -562,6 +568,7 @@ function App() {
               <FertilizersPage
                 fertilizers={fertilizers}
                 search={search}
+                logoutUser={logoutUser}
               />
             }
           />
@@ -575,6 +582,7 @@ function App() {
               <PestsPage
                 pests={pests}
                 search={search}
+                logoutUser={logoutUser}
               />
             }
           />
@@ -587,7 +595,7 @@ function App() {
             element={
               <div className="App">
 
-                <Header />
+                <Header logoutUser={logoutUser} />
 
                 <div className="container">
 
@@ -610,6 +618,7 @@ function App() {
               <RecommendationsPage
                 recommendations={recommendations}
                 search={search}
+                logoutUser={logoutUser}
               />
             }
           />
@@ -622,7 +631,8 @@ function App() {
             element={
               <div className="App">
 
-                <Header />
+                <Header logoutUser={logoutUser} />
+
 
                 <div className="container">
 

@@ -20,7 +20,7 @@ import FarmingTips from "./components/FarmingTips";
 import DownloadReport from "./components/DownloadReport";
 import AIRecommendation from "./components/AIRecommendation";
 
-import Welcome from "./pages/welcome";
+import Welcome from "./pages/Welcome";
 import ProtectedRoute from "./ProtectedRoute";
 
 import {
@@ -44,11 +44,12 @@ function DashboardPage({
   users,
   search,
   setSearch,
+  logoutUser,
 }) {
   return (
     <div className="App">
 
-      <Header />
+      <Header logoutUser={logoutUser} />
 
       <Dashboard
         crops={crops}

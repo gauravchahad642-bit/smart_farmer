@@ -1,11 +1,11 @@
 import { useNavigate } from "react-router-dom";
 import logo from "../logo.png";
 
-function Header() {
+function Header({ logoutUser }) {
   const navigate = useNavigate();
 
-  const logoutUser = () => {
-    localStorage.removeItem("token");
+  const handleLogout = () => {
+    logoutUser();
     navigate("/login");
   };
 
@@ -54,7 +54,7 @@ function Header() {
           Users
         </button>
 
-        <button onClick={logoutUser}>
+        <button onClick={handleLogout}>
           Logout
         </button>
 
